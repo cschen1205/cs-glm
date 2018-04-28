@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimuKit.ML.GLM", "SimuKit.ML.GLM\SimuKit.ML.GLM.csproj", "{33C0D99A-3D1E-4A54-906E-DBBB323CC892}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GLM", "GLM\GLM.csproj", "{33C0D99A-3D1E-4A54-906E-DBBB323CC892}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Numerics", "..\packages\MathNet.Numerics\src\Numerics\Numerics.csproj", "{B7CAE5F4-A23F-4438-B5BE-41226618B695}"
 EndProject
@@ -15,20 +15,20 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimuKit.Solvers.Continuous"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimuKit.Solvers.Continuous.LocalSearch", "..\SimuKit.Solvers.Continuous\SimuKit.Solvers.Continuous.LocalSearch\SimuKit.Solvers.Continuous.LocalSearch.csproj", "{3D727109-2E3C-4DD6-8C13-C3AF22CD42DB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimuKit.ML.GLM.UT", "SimuKit.ML.GLM.UT\SimuKit.ML.GLM.UT.csproj", "{3A82B055-3873-47FA-82C0-D0FF2F598142}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GLM.UT", "GLM.UT\GLM.UT.csproj", "{3A82B055-3873-47FA-82C0-D0FF2F598142}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{1747846C-B182-4E9C-A527-B74518B8409B}"
 	ProjectSection(SolutionItems) = preProject
 		Local.testsettings = Local.testsettings
-		SimuKit.ML.GLM.vsmdi = SimuKit.ML.GLM.vsmdi
+		GLM.vsmdi = GLM.vsmdi
 		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimuKit.ML.GLM.FT", "SimuKit.ML.GLM.FT\SimuKit.ML.GLM.FT.csproj", "{59C40F6A-4C25-441E-B888-FFBC1C529FE5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GLM.FT", "GLM.FT\GLM.FT.csproj", "{59C40F6A-4C25-441E-B888-FFBC1C529FE5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimuKit.Math.LinAlg", "..\SimuKit.Math.LinAlg\SimuKit.Math.LinAlg\SimuKit.Math.LinAlg.csproj", "{F7F13966-2366-4543-B5BE-271492934498}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimuKit.ML", "..\SimuKit.ML\SimuKit.ML.csproj", "{A0EEAC9F-645A-4C76-A960-31C79BA71417}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimuKit.ML", "..\SimuKit.ML\csproj", "{A0EEAC9F-645A-4C76-A960-31C79BA71417}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -146,6 +146,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
-		CategoryFile = SimuKit.ML.GLM.vsmdi
+		CategoryFile = GLM.vsmdi
 	EndGlobalSection
 EndGlobal

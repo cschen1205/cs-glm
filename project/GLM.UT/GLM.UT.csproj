@@ -9,8 +9,8 @@
     <ProjectGuid>{3A82B055-3873-47FA-82C0-D0FF2F598142}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SimuKit.ML.GLM.UT</RootNamespace>
-    <AssemblyName>SimuKit.ML.GLM.UT</AssemblyName>
+    <RootNamespace>GLM.UT</RootNamespace>
+    <AssemblyName>GLM.UT</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -71,9 +71,9 @@
     <Compile Include="GlmIrlsQrNewtonTest.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SimuKit.ML.GLM\SimuKit.ML.GLM.csproj">
+    <ProjectReference Include="..\GLM\GLM.csproj">
       <Project>{33C0D99A-3D1E-4A54-906E-DBBB323CC892}</Project>
-      <Name>SimuKit.ML.GLM</Name>
+      <Name>GLM</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
