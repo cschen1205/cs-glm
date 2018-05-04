@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.IO;
-using SimuKit.Solvers.Continuous.LocalSearch;
 
 namespace GlmSharp.FT
 {
@@ -18,7 +15,7 @@ namespace GlmSharp.FT
         {
             string[] headers = null;
             Dictionary<string, List<double>> data = new Dictionary<string, List<double>>();
-            using (StreamReader reader = new StreamReader(@"C:\SimuKit\SimuKit\GlmSharp\contraception.csv"))
+            using (StreamReader reader = new StreamReader("contraception.csv"))
             {
                 string line;
                 bool firstLine = true;
@@ -56,6 +53,7 @@ namespace GlmSharp.FT
                             double.TryParse(content[i], out value);
                         }
                         data[header].Add(value);
+
                     }
 
                 }
@@ -66,6 +64,7 @@ namespace GlmSharp.FT
         
         public static void TestContraception()
         {
+            Console.WriteLine("Get Data");
             Dictionary<string, List<double>> data = GetData();
             int n = 8;
             int m = data[""].Count;
@@ -86,8 +85,8 @@ namespace GlmSharp.FT
 
                 b[i] = data["use"][i];
             }
-
-            GlmIrlsQrNewton solver = new GlmIrlsQrNewton(GlmDistributionFamily.Binomial, A, b);
+            Console.WriteLine("Running Irls Qr Newton");
+            GlmIrls solver = new GlmIrls(GlmDistributionFamily.Binomial, A, b);
             double[] x = solver.Solve();
 
             Console.WriteLine("(Intercept): {0}", x[0]);

@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using MathNet.Numerics.LinearAlgebra.Double;
-using MathNet.Numerics.LinearAlgebra.Generic;
+using ContinuousOptimization.Statistics;
+using cs_matrix;
 
 /// <summary>
 /// In regression, we tried to find a set of model coefficient such for 
@@ -45,16 +45,16 @@ namespace GlmSharp
     /// </summary>
     public class GlmIrls : Glm
     {
-        private Matrix<double> A;
-        private Vector<double> b;
-        private Matrix<double> At;
+        private IMatrix A;
+        private IVector b;
+        private IMatrix At;
         private double[] mX;
         
         public GlmIrls(GlmDistributionFamily distribution, ILinkFunction linkFunc, double[,] A, double[] b)
             : base(distribution, linkFunc, null, null, null)
         {
-            this.A = new DenseMatrix(A);
-            this.b = new DenseVector(b);
+            this.A = new SparseMatrix(A);
+            this.b = new SparseVector(b);
             this.At = this.A.Transpose();
             this.mStats = new Statistics.GlmStatistics(A.GetLength(1), b.Length);
         }
@@ -62,8 +62,8 @@ namespace GlmSharp
         public GlmIrls(GlmDistributionFamily distribution, double[,] A, double[] b)
             : base(distribution)
         {
-            this.A = new DenseMatrix(A);
-            this.b = new DenseVector(b);
+            this.A = new SparseMatrix(A);
+            this.b = new SparseVector(b);
             this.At = this.A.Transpose();
             this.mStats = new Statistics.GlmStatistics(A.GetLength(1), b.Length);
         }
@@ -71,21 +71,21 @@ namespace GlmSharp
         public override double[] Solve()
         {
             int m = A.RowCount;
-            int n = A.ColumnCount;
+            int n = A.ColCount;
             
-            Vector<double> x = new DenseVector(n);
+            IVector x = new SparseVector(n);
             for (int i = 0; i < n; ++i)
             {
                 x[i] = 0;
             }
 
-            Matrix<double> W = null;
-            Matrix<double> AtWAInv = null;
+            IMatrix W = null;
+            IMatrix AtWAInv = null;
 
             for (int j = 0; j < mMaxIters; ++j)
             {
-                Vector<double> eta = A.Multiply(x);
-                Vector<double> z = new DenseVector(m);
+                IVector eta = A.Multiply(x);
+                IVector z = new SparseVector(m);
                 double[] g = new double[m];
                 double[] gprime = new double[m];
 
@@ -97,7 +97,7 @@ namespace GlmSharp
                     z[k] = eta[k] + (b[k] - g[k]) / gprime[k];
                 }
 
-                W = SparseMatrix.Identity(m);
+                W = A.Identity(m);
                 for (int k = 0; k < m; ++k)
                 {
                     double g_variance = GetVariance(g[k]);
@@ -108,16 +108,22 @@ namespace GlmSharp
                     W[k, k] = gprime[k] * gprime[k] / g_variance;
                 }
 
-                Vector<double> x_old = x;
+                IVector x_old = x;
 
-                Matrix<double> AtW = At.Multiply(W);
+                IMatrix AtW = At.Multiply(W);
 
                 // solve x for At * W * A * x = At * W * z
-                Matrix<double> AtWA = AtW.Multiply(A);
-                AtWAInv = AtWA.Inverse();
+                IMatrix AtWA = AtW.Multiply(A);
+                AtWAInv = QRSolver.Invert(AtWA);
                 x = AtWAInv.Multiply(AtW).Multiply(z);
 
-                if ((x - x_old).Norm(2) < mTol)
+                double cost = x.Minus(x_old).Norm(2);
+                if (j % 10 == 0)
+                {
+                    Console.WriteLine("Iteration: {0}, Cost: {1}", j, cost);
+                }
+
+                if (cost < mTol)
                 {
                     break;
                 }
@@ -138,10 +144,10 @@ namespace GlmSharp
         /// 
         /// </summary>
         /// <param name="vcovmat">variance-covariance matrix for the model coefficients</param>
-        private void UpdateStatistics(Matrix<double> vcovmat, Matrix<double> W)
+        private void UpdateStatistics(IMatrix vcovmat, IMatrix W)
         {
             int n = vcovmat.RowCount;
-            int m = b.Count;
+            int m = b.Dimension;
 
             for (int i = 0; i < n; ++i)
             {

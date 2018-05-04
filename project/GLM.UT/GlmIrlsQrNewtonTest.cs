@@ -14,7 +14,7 @@ namespace GlmSharp.UT
         {
             string[] headers = null;
             Dictionary<string, List<double>> data = new Dictionary<string, List<double>>();
-            using (StreamReader reader = new StreamReader(@"C:\SimuKit\SimuKit\GlmSharp\contraception.csv"))
+            using (StreamReader reader = new StreamReader(@"contraception.csv"))
             {
                 string line;
                 bool firstLine = true;
@@ -84,7 +84,7 @@ namespace GlmSharp.UT
                 b[i] = data["use"][i];
             }
 
-            GlmIrlsQrNewton solver = new GlmIrlsQrNewton(GlmDistributionFamily.Binomial, A, b);
+            GlmIrls solver = new GlmIrls(GlmDistributionFamily.Binomial, A, b);
             double[] x = solver.Solve();
 
             Console.WriteLine("(Intercept): {0}", x[0]);

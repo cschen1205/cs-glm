@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using SimuKit.Math.LinearAlgebra;
-using SimuKit.Math.Statistics;
 using System.Diagnostics;
-using SimuKit.Math.LinAlg;
+using cs_matrix;
+using ContinuousOptimization.Statistics;
 
 namespace GlmSharp
 {
@@ -22,17 +21,17 @@ namespace GlmSharp
     /// </summary>
     public class GlmIrlsSvdNewton : Glm
     {
-        private IMatrix<int, double> A;
-        private IVector<int, double> b;
-        private IMatrix<int, double> At;
+        private IMatrix A;
+        private IVector b;
+        private IMatrix At;
         public double epsilon = 1e-10;
         private double[] mX;
 
         public GlmIrlsSvdNewton(GlmDistributionFamily distribution, ILinkFunction linkFunc, double[,] A, double[] b)
             : base(distribution, linkFunc, null, null, null)
         {
-            this.A = new SparseMatrix<int, double>(A);
-            this.b = new SparseVector<int, double>(b);
+            this.A = new SparseMatrix(A);
+            this.b = new SparseVector(b);
             this.At = this.A.Transpose();
             this.mStats = new Statistics.GlmStatistics(A.GetLength(1), b.Length);
         }
@@ -40,8 +39,8 @@ namespace GlmSharp
         public GlmIrlsSvdNewton(GlmDistributionFamily distribution, double[,] A, double[] b)
             : base(distribution)
         {
-            this.A = new SparseMatrix<int, double>(A);
-            this.b = new SparseVector<int, double>(b);
+            this.A = new SparseMatrix(A);
+            this.b = new SparseVector(b);
             this.At = this.A.Transpose();
             this.mStats = new Statistics.GlmStatistics(A.GetLength(1), b.Length);
         }
@@ -53,30 +52,30 @@ namespace GlmSharp
 
             Debug.Assert(m >= n);
             
-            IVector<int, double> t = new SparseVector<int, double>(n);
+            IVector t = new SparseVector(n);
             for (int i = 0; i < m; ++i)
             {
                 t[i] = 0;
             }
-            IVector<int, double> s = new SparseVector<int, double>(n);
-            IVector<int, double> sy = new SparseVector<int, double>(n);
+            IVector s = new SparseVector(n);
+            IVector sy = new SparseVector(n);
             for (int i = 0; i < n; ++i)
             {
                 s[i] = 0;
             }
-            IVector<int, double> s_old = s;
+            IVector s_old = s;
 
-            IMatrix<int, double> U; // U is a m x m orthogonal matrix 
-            IMatrix<int, double> Vt; // V is a n x n orthogonal matrix
-            IMatrix<int, double> Sigma; // Sigma is a m x n diagonal matrix with non-negative real numbers on its diagonal 
-            SVD<double>.Factorize(A, out U, out Sigma, out Vt); // A is a m x n matrix
+            IMatrix U; // U is a m x m orthogonal matrix 
+            IMatrix Vt; // V is a n x n orthogonal matrix
+            IMatrix Sigma; // Sigma is a m x n diagonal matrix with non-negative real numbers on its diagonal 
+            SVD.Factorize(A, out U, out Sigma, out Vt); // A is a m x n matrix
            
-            IMatrix<int, double> Ut = U.Transpose();
-            IMatrix<int, double> V = Vt.Transpose();
+            IMatrix Ut = U.Transpose();
+            IMatrix V = Vt.Transpose();
            
 
             //SigmaInv is obtained by replacing every non-zero diagonal entry by its reciprocal and transposing the resulting matrix
-            IMatrix<int, double> SigmaInv = new SparseMatrix<int, double>(m, n);
+            IMatrix SigmaInv = new SparseMatrix(m, n);
             for (int i = 0; i < n; ++i) // assuming m >= n
             {
                 double sigma_i = Sigma[i, i];
@@ -94,7 +93,7 @@ namespace GlmSharp
             {
                 Console.WriteLine("j: {0}", j);
 
-                IVector<int, double> z = new SparseVector<int, double>(m);
+                IVector z = new SparseVector(m);
                 double[] g = new double[m];
                 double[] gprime = new double[m];
 
@@ -124,7 +123,7 @@ namespace GlmSharp
 
                 s_old = s;
 
-                IMatrix<int, double> UtW = new SparseMatrix<int, double>(m, m);
+                IMatrix UtW = new SparseMatrix(m, m);
                 for (int k = 0; k < m; ++k)
                 {
                     for (int k2 = 0; k2 < m; ++k2)
@@ -133,18 +132,18 @@ namespace GlmSharp
                     }
                 }
 
-                IMatrix<int, double> UtWU = UtW.Multiply(U); // m x m positive definite matrix
-                IMatrix<int, double> L; // m x m lower triangular matrix
-                Cholesky<double>.Factorize(UtWU, out L);
+                IMatrix UtWU = UtW.Multiply(U); // m x m positive definite matrix
+                IMatrix L; // m x m lower triangular matrix
+                Cholesky.Factorize(UtWU, out L);
                 
-                IMatrix<int, double> Lt = L.Transpose(); // m x m upper triangular matrix
+                IMatrix Lt = L.Transpose(); // m x m upper triangular matrix
 
-                IVector<int, double> UtWz = UtW.Multiply(z); // m x 1 vector
+                IVector UtWz = UtW.Multiply(z); // m x 1 vector
 
                 // (Ut * W * U) * s = Ut * W * z
                 // L * Lt * s = Ut * W * z (Cholesky factorization on Ut * W * U)
                 // L * sy = Ut * W * z, Lt * s = sy 
-                s = new SparseVector<int, double>(n);
+                s = new SparseVector(n);
                 for (int i = 0; i < n; ++i)
                 {
                     s[i] = 0;
@@ -181,7 +180,7 @@ namespace GlmSharp
                 }
             }
 
-            IVector<int, double> x = V.Multiply(SigmaInv).Multiply(Ut).Multiply(t);
+            IVector x = V.Multiply(SigmaInv).Multiply(Ut).Multiply(t);
 
             mX = new double[n];
             for (int i = 0; i < n; ++i)
@@ -204,8 +203,8 @@ namespace GlmSharp
 
         protected void UpdateStatistics(double[] W)
         {
-            IMatrix<int, double> AtWA = At.ScalarMultiply(W).Multiply(A);
-            IMatrix<int, double> AtWAInv = QRSolver<double>.Invert(AtWA);
+            IMatrix AtWA = At.ScalarMultiply(W).Multiply(A);
+            IMatrix AtWAInv = QRSolver.Invert(AtWA);
 
             int n = AtWAInv.RowCount;
             int m = b.Dimension;

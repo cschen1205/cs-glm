@@ -23,26 +23,7 @@ namespace GlmSharp
             levelOrg = new Dictionary<int, Dictionary<int, int>>();
             for (int i = 1; i < n; ++i)
             {
-                if (rec.IsFeatureCategorical(i))
-                {
-                    HashSet<int> levels = new HashSet<int>();
-                    for (int j = 0; j < m; j++)
-                    {
-                        int level = (int)records[j][i];
-                        levels.Add(level);
-                    }
-                    n += levels.Count;
-                    levelOrg[i] = new Dictionary<int, int>();
-                    int level_index = 0;
-                    foreach (int level in levels)
-                    {
-                        levelOrg[i][level] = level_index++;
-                    }
-                }
-                else
-                {
-                    n++;
-                }
+                n++;
             }
         }
 
@@ -65,20 +46,7 @@ namespace GlmSharp
                 int index = 0;
                 for (int j = 0; j < d; ++j)
                 {
-                    if (rec.IsFeatureCategorical(j))
-                    {
-                        int level = (int)rec[j];
-                        int level_index = levelOrg[j][level];
-                        int level_num = levelOrg[j].Count;
-                        for (int k = 0; k < level_num; ++k)
-                        {
-                            A[i, index++] = (k == level_index) ? 1 : 0;
-                        }
-                    }
-                    else
-                    {
-                        A[i, index++] = rec[j];
-                    }
+                    A[i, index++] = rec.data[j];
                 }
                 b[i] = rec.YValue;
             }
@@ -99,20 +67,7 @@ namespace GlmSharp
             int index = 0;
             for (int j = 0; j < d; ++j)
             {
-                if (input_0.IsFeatureCategorical(j))
-                {
-                    int level = (int)input_0[j];
-                    int level_index = levelOrg[j][level];
-                    int level_num = levelOrg[j].Count;
-                    for (int k = 0; k < level_num; ++k)
-                    {
-                        x[index++] = (k == level_index) ? 1 : 0;
-                    }
-                }
-                else
-                {
-                    x[index++] = input_0[j];
-                }
+                x[index++] = input_0.data[j];
             }
 
             return solver.Predict(x);

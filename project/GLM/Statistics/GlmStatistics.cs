@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using SimuKit.Math.Statistics;
-using MathNet.Numerics.LinearAlgebra.Double;
-using MathNet.Numerics.LinearAlgebra.Generic;
+using ContinuousOptimization.Statistics;
+using cs_matrix;
 
 namespace GlmSharp.Statistics
 {
@@ -54,7 +53,7 @@ namespace GlmSharp.Statistics
             mResponseVariance = System.Math.Pow(StdDev.GetStdDev(b, mResponseMean), 2);
 
             // (A.transpose * A).inverse * sigma^2
-            Matrix<double> AtA = new DenseMatrix(n);
+            IMatrix AtA = new SparseMatrix(n, n);
             for (int i = 0; i < n; ++i)
             {
                 for (int j = 0; j < n; ++j)
@@ -67,7 +66,7 @@ namespace GlmSharp.Statistics
                     AtA[i, j] = cross_prod;
                 }
             }
-            Matrix<double> AtAInv = AtA.Inverse();
+            IMatrix AtAInv = QRSolver.Invert(AtA);
             double sigmaSq = mResidualStdDev * mResidualStdDev;
 
             mVcovMatrix = new double[n][];

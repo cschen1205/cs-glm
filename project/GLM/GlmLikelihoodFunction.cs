@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using SimuKit.Math.Statistics;
+using ContinuousOptimization.Statistics;
 
 namespace GlmSharp
 {
@@ -49,7 +49,7 @@ namespace GlmSharp
                 RDataRecord rec = data[i];
                 for (int j = 0; j < k; ++j)
                 {
-                    linear_predictor += rec[j] * beta_hat[j];
+                    linear_predictor += rec.data[j] * beta_hat[j];
                 }
                 double residual = rec.YValue - linear_predictor;
                 residual_sum_of_squares += residual*residual;

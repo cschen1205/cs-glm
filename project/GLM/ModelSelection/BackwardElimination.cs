@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using SimuKit.Solvers.Continuous.LocalSearch;
-using SimuKit.Math.Distribution;
-using SimuKit.Math.Statistics;
-using SimuKit.ML.Lang;
+using ContinuousOptimization;
+using ContinuousOptimization.Statistics;
 
 /// <summary>
 /// The best model is not always the most complicated. Sometimes including variables that are not
@@ -226,7 +224,7 @@ namespace GlmSharp.ModelSelection
 
         public static Glm FitModel(GlmSolverFactory solverFactory, List<RDataRecord> records)
          {
-            DataTransformer<RDataRecord> dt = new DataTransformer<RDataRecord>();
+            DataTransformer dt = new DataTransformer();
             dt.DoFeaturesScaling(records);
 
             Glm solver = solverFactory.CreateSolver(records);
@@ -246,7 +244,7 @@ namespace GlmSharp.ModelSelection
                  for (int d=0; d < candidate_features.Count; ++d)
                  {
                      int featureId = candidate_features[d];
-                     rec2[d+1] = rec[featureId];
+                     rec2.data[d+1] = rec.data[featureId];
                  }
                  records2.Add(rec2);
              }
