@@ -2,5 +2,5 @@ Run the following command line:
 
 ```bash
 cd nuget/
-nuget pack cs-libsvm.nuspec
+nuget pack cs-glm.nuspec
 ```
