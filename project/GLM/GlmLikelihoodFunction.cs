@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using SimuKit.Math.Statistics;
 
-namespace SimuKit.ML.GLM
+namespace GlmSharp
 {
     /// <summary>
     /// The likelihood function for the linear model

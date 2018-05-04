@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace SimuKit.ML.GLM.LinkFunctions
+namespace GlmSharp.LinkFunctions
 {
     public abstract class BaseLinkFunction : ILinkFunction
     {

@@ -6,7 +6,7 @@ using SimuKit.Math.Statistics;
 using MathNet.Numerics.LinearAlgebra.Double;
 using MathNet.Numerics.LinearAlgebra.Generic;
 
-namespace SimuKit.ML.GLM.Statistics
+namespace GlmSharp.Statistics
 {
     public class GlmStatistics
     {

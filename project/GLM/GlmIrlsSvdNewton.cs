@@ -7,7 +7,7 @@ using SimuKit.Math.Statistics;
 using System.Diagnostics;
 using SimuKit.Math.LinAlg;
 
-namespace SimuKit.ML.GLM
+namespace GlmSharp
 {
     /// <summary>
     /// The implementation of Glm based on IRLS SVD Newton variant

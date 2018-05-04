@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using SimuKit.Math.LinearAlgebra;
-using SimuKit.Math.Statistics;
 using MathNet.Numerics.LinearAlgebra.Double;
 using MathNet.Numerics.LinearAlgebra.Generic;
 
@@ -34,7 +32,7 @@ using MathNet.Numerics.LinearAlgebra.Generic;
 /// x_bar = (A.transpose * W * A).inverse * A.transpose * W * b
 /// This is commonly solved using IRLS
 /// </summary>
-namespace SimuKit.ML.GLM
+namespace GlmSharp
 {
     /// <summary>
     /// The implementation of Glm based on iteratively reweighted least squares estimation (IRLS)

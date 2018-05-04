@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace SimuKit.ML.GLM.ModelSelection
+namespace GlmSharp.ModelSelection
 {
 
     public enum ModelSelectionCriteria

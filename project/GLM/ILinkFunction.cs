@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace SimuKit.ML.GLM
+namespace GlmSharp
 {
     /// <summary>
     /// A link function a = f(b) is a bijection chosen to map the constraint interval onto the real line.

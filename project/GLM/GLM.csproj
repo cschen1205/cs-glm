@@ -8,9 +8,9 @@
     <ProjectGuid>{33C0D99A-3D1E-4A54-906E-DBBB323CC892}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>GLM</RootNamespace>
-    <AssemblyName>GLM</AssemblyName>
-    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <RootNamespace>GlmSharp</RootNamespace>
+    <AssemblyName>GlmSharp</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -53,8 +53,21 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="cs-optimization-continuous-solutions, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\cs-optimization-continuous-solutions.1.0.2\lib\net452\Release\cs-optimization-continuous-solutions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MathNet.Numerics, Version=2.4.0.26, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MathNet.Numerics.2.4.0\lib\net40\MathNet.Numerics.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MathNet.Numerics.IO, Version=2.4.0.26, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MathNet.Numerics.2.4.0\lib\net40\MathNet.Numerics.IO.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Numerics" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -84,36 +97,13 @@
     <Compile Include="Statistics\GlmStatistics.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\packages\MathNet.Numerics\src\Numerics\Numerics.csproj">
-      <Project>{B7CAE5F4-A23F-4438-B5BE-41226618B695}</Project>
-      <Name>Numerics</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\SimuKit.Math.LinAlg\SimuKit.Math.LinAlg\SimuKit.Math.LinAlg.csproj">
-      <Project>{F7F13966-2366-4543-B5BE-271492934498}</Project>
-      <Name>SimuKit.Math.LinAlg</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\SimuKit.Math\SimuKit.Math.csproj">
-      <Project>{206551B4-70D2-4587-B1B8-AB276578B8F4}</Project>
-      <Name>SimuKit.Math</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\SimuKit.ML\csproj">
-      <Project>{A0EEAC9F-645A-4C76-A960-31C79BA71417}</Project>
-      <Name>SimuKit.ML</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\SimuKit.Solvers.Continuous\SimuKit.Solvers.Continuous.LocalSearch\SimuKit.Solvers.Continuous.LocalSearch.csproj">
-      <Project>{3D727109-2E3C-4DD6-8C13-C3AF22CD42DB}</Project>
-      <Name>SimuKit.Solvers.Continuous.LocalSearch</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\SimuKit.Solvers.Continuous\SimuKit.Solvers.Continuous\SimuKit.Solvers.Continuous.csproj">
-      <Project>{AA623603-14A4-4265-9DF7-C4BC32E2FA47}</Project>
-      <Name>SimuKit.Solvers.Continuous</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\SimuKit.Solvers.Core\SimuKit.Solvers.Core.csproj">
-      <Project>{3989DBB2-154B-45DB-A63F-7AE3D36A27D2}</Project>
-      <Name>SimuKit.Solvers.Core</Name>
-    </ProjectReference>
+    <Content Include="App_Readme\MathNet.Numerics.authors.txt" />
+    <Content Include="App_Readme\MathNet.Numerics.copyright.txt" />
+    <Content Include="App_Readme\MathNet.Numerics.readme.txt" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

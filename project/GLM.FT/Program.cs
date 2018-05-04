@@ -5,7 +5,7 @@ using System.Text;
 using System.IO;
 using SimuKit.Solvers.Continuous.LocalSearch;
 
-namespace SimuKit.ML.GLM.FT
+namespace GlmSharp.FT
 {
     class Program
     {
@@ -18,7 +18,7 @@ namespace SimuKit.ML.GLM.FT
         {
             string[] headers = null;
             Dictionary<string, List<double>> data = new Dictionary<string, List<double>>();
-            using (StreamReader reader = new StreamReader(@"C:\SimuKit\SimuKit\SimuKit.ML.GLM\contraception.csv"))
+            using (StreamReader reader = new StreamReader(@"C:\SimuKit\SimuKit\GlmSharp\contraception.csv"))
             {
                 string line;
                 bool firstLine = true;

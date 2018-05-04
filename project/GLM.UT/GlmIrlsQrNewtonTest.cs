@@ -5,7 +5,7 @@ using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.IO;
 
-namespace SimuKit.ML.GLM.UT
+namespace GlmSharp.UT
 {
     [TestClass]
     public class GlmIrlsQrNewtonTest
@@ -14,7 +14,7 @@ namespace SimuKit.ML.GLM.UT
         {
             string[] headers = null;
             Dictionary<string, List<double>> data = new Dictionary<string, List<double>>();
-            using (StreamReader reader = new StreamReader(@"C:\SimuKit\SimuKit\SimuKit.ML.GLM\contraception.csv"))
+            using (StreamReader reader = new StreamReader(@"C:\SimuKit\SimuKit\GlmSharp\contraception.csv"))
             {
                 string line;
                 bool firstLine = true;

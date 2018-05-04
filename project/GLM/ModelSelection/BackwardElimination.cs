@@ -16,7 +16,7 @@ using SimuKit.ML.Lang;
 /// model selection is to assess whether the full model is the best model. If it isn't, we want to identify a 
 /// smaller model that is preferable.
 /// </summary>
-namespace SimuKit.ML.GLM.ModelSelection
+namespace GlmSharp.ModelSelection
 {
     /// <summary>
     /// The backward-elimination strategy starts with the model that includes all potentiall predictor variables.

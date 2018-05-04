@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace SimuKit.ML.GLM.LinkFunctions
+namespace GlmSharp.LinkFunctions
 {
     /// <summary>
     /// The poisson link function maps the constraint interval b to linear line a

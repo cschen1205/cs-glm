@@ -8,9 +8,9 @@
     <ProjectGuid>{59C40F6A-4C25-441E-B888-FFBC1C529FE5}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>GLM.FT</RootNamespace>
+    <RootNamespace>GlmSharp</RootNamespace>
     <AssemblyName>GLM.FT</AssemblyName>
-    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -68,22 +68,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\SimuKit.Math\SimuKit.Math.csproj">
-      <Project>{206551b4-70d2-4587-b1b8-ab276578b8f4}</Project>
-      <Name>SimuKit.Math</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\SimuKit.Solvers.Continuous\SimuKit.Solvers.Continuous.LocalSearch\SimuKit.Solvers.Continuous.LocalSearch.csproj">
-      <Project>{3D727109-2E3C-4DD6-8C13-C3AF22CD42DB}</Project>
-      <Name>SimuKit.Solvers.Continuous.LocalSearch</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\SimuKit.Solvers.Continuous\SimuKit.Solvers.Continuous\SimuKit.Solvers.Continuous.csproj">
-      <Project>{AA623603-14A4-4265-9DF7-C4BC32E2FA47}</Project>
-      <Name>SimuKit.Solvers.Continuous</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\SimuKit.Solvers.Core\SimuKit.Solvers.Core.csproj">
-      <Project>{3989DBB2-154B-45DB-A63F-7AE3D36A27D2}</Project>
-      <Name>SimuKit.Solvers.Core</Name>
-    </ProjectReference>
     <ProjectReference Include="..\GLM\GLM.csproj">
       <Project>{33C0D99A-3D1E-4A54-906E-DBBB323CC892}</Project>
       <Name>GLM</Name>

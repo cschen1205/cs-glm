@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using SimuKit.Solvers.Continuous;
-using SimuKit.Math.LinearAlgebra;
-using SimuKit.ML.GLM.LinkFunctions;
+using GlmSharp.LinkFunctions;
 using System.Diagnostics;
-using SimuKit.ML.GLM.Statistics;
+using GlmSharp.Statistics;
+using ContinuousOptimization;
+using ContinuousOptimization.LinearAlgebra;
 
 /// <summary>
 /// In regression, we tried to find a set of model coefficient such for 
@@ -46,7 +46,7 @@ using SimuKit.ML.GLM.Statistics;
 /// for min (A * x - b).transpose * (A * x -b)
 /// This can be solved using the default solver implemented in Glm class
 /// </summary>
-namespace SimuKit.ML.GLM
+namespace GlmSharp
 {
     /// <summary>
     /// Link: http://bwlewis.github.io/GLM/
